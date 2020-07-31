@@ -1,5 +1,5 @@
 {% extends 'movies/base.html' %}
-{% load i18n static %}
+{% load static %}
 {% block title %} {{ movie.title }} {% endblock title %}
 {% block container %}
     <div class="container py-md-3">
@@ -22,7 +22,7 @@
                 <h5 class="editContent"></h5>
                 <ul>
                     <li style="list-style: none">
-                        <span><b>{% trans Год%}Год:</b> {{ movie.year }}</span></li>
+                        <span><b>Год:</b> {{ movie.year }}</span></li>
                     <li style="list-style: none">
                         <span><b>Страна:</b> {{ movie.country }}</span>
                     </li>
