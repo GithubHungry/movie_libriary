@@ -60,53 +60,52 @@
                     <li style="list-style: none">
                         <span><b>Сборы в мире:</b> ${{ movie.fess_in_world }}</span>
                     </li>
-                    <li style="list-style: none">
-                        <a href="#"><b>Рейтинг:</b>
-                            <span class="fa fa-star" aria-hidden="true"
-                                  style="outline: none; cursor: inherit;"></span>
-                            <span class="fa fa-star" aria-hidden="true"
-                                  style="outline: none; cursor: inherit;"></span>
-                            <span class="fa fa-star" aria-hidden="true"
-                                  style="outline: none; cursor: inherit;"></span>
-                            <span class="fa fa-star" aria-hidden="true"
-                                  style="outline: none; cursor: inherit;"></span>
-                            <span class="fa fa-star" aria-hidden="true"
-                                  style="outline: none; cursor: inherit;"></span>
-                            <span class="editContent"
-                                  style="outline: none; cursor: inherit;">5.0</span>
-                        </a>
+
+
+                    <li>
+                        <form action="{% url 'add_rating' %}" method="POST" name="rating">
+
+                            <b>Рейтинг:</b>
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ request.path }}" name="next">
+                            <input type="hidden" value="{{ movie.id }}" name="book">
+                            <span class="rating">
+                                {% for key,value in star_form.fields.star.choices %}
+                                    <input id="rating{{ value }}" type="radio" name="star"
+                                           value="{{ key }}">
+                                    <label for='rating{{ value }}'>{{ key }}</label>
+                                {% endfor %}
+                            </span>
+                        </form>
                     </li>
-                    <div class="share-desc">
-                        <div class="share">
-                            <h4 class="editContent"
-                                style="outline: none; cursor: inherit;">
-                                Share:</h4>
-                            <ul class="w3layouts_social_list list-unstyled">
-                                <li>
-                                    <a href="#" class="w3pvt_facebook editContent"
-                                       style="outline: none; cursor: inherit;">
-                                                <span class="fa fa-facebook-f"
-                                                      style="outline: none; cursor: inherit;"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="w3pvt_twitter editContent"
-                                       style="outline: none; cursor: inherit;">
+                </ul>
+
+
+                <div class="share-desc">
+                    <div class="share">
+                        <h4 class="editContent">
+                            Share:</h4>
+                        <ul class="w3layouts_social_list list-unstyled">
+                            <li>
+                                <a href="#" class="w3pvt_facebook editContent">
+                                    <span class="fa fa-facebook-f"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="w3pvt_twitter editContent">
                                                 <span class="fa fa-twitter"
                                                       style="outline: none; cursor: inherit;"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="w3pvt_dribble editContent"
-                                       style="outline: none; cursor: inherit;">
-                                                <span class="fa fa-dribbble"
-                                                      style="outline: none; cursor: inherit;"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="w3pvt_dribble editContent">
+                                    <span class="fa fa-dribbble"></span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
         <div class="row sub-para-w3layouts mt-5">
